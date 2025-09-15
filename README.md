@@ -15,7 +15,7 @@ This project allows users to **add, view, update, and delete** items from their 
 - npm install  
 ## Step 3 
 - To run app
-- npm start
+- npm run backend
   
 ### Url to Get the api 
  ```
