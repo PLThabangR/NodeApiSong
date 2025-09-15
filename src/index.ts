@@ -1,5 +1,9 @@
-console.log('Hello, World!');
+import express from "express";
+//import { router } from "./routes";
 
-const a = 1;
-const b = 2;
-console.log(a + b);
+const app = express();
+
+app.use(express.json());
+//app.use(router);
+
+app.listen(3333, () => console.log("Server is running!"));
