@@ -7,7 +7,7 @@ This project allows users to **add, view, update, and delete** items from their 
 ## step 1
 - Clone this project using git clone 
 ```
- git https://github.com/PLThabangR/node-shopping-list.git
+ https://github.com/PLThabangR/NodeBooksApi.git
 ```
 
 
