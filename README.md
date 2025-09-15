@@ -1,7 +1,7 @@
 # Book API 
 
 A simple **Book List REST API** built with Node.js and TypeScript.  
-This project allows users to **add, view, update, and delete** items from their Book list.
+This project allows users to **add, view, update, and delete** items from their Book list array.
 
 ---
 ## step 1
@@ -19,14 +19,14 @@ This project allows users to **add, view, update, and delete** items from their 
   
 ### Url to Get the api 
  ```
-http://localhost:6000/products or http://localhost:6000/products/id
+http://localhost:3000/books or http://localhost:3000/books/id
 ```
 ##  Features
--  **Add items** to the shopping list  
+-  **Add items** to the array
 -  **View all items** or a single item by ID
  
--  **Update items** (e.g., name, quantity, status)  
--  **Delete items** from the shopping list  
+-  **Update items** (e.g., title, author)  
+-  **Delete items** from the books array  
 -  Structured with **RESTful endpoints**  
 - 🛠 Built with scalability and clean code practices  
 
