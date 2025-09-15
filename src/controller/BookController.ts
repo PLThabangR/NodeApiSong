@@ -21,6 +21,9 @@ let BookArray : Book[] = [
 const addBook = (req: Request, res:Response) => {
     //destructure from body
         const { id, title, author } = req.body;
+
+if(!title || !author)
+    return res.status(404).json({message:"Title and author are required"});
         //create new bookobject
         const newBook = { id: BookArray.length + 1, title, author };
         //push new book to array
@@ -55,18 +58,22 @@ const updateBook = (req: Request, res:Response) => {
         const { title, author } = req.body;
         //destructure id from params
         const { id } = req.params;
+        
+      
         // Check if id is valid
         if(!id)return res.status(404).json({message:"Invalid id"});
 
+            //convert id to number 
+          const bookID = parseInt(id);
         //Check if book is found 
-        const book = BookArray.find((book) => book.id === parseInt(id))
+        const book = BookArray.find((book) => book.id === bookID)
         //if not return error message
         if(!book) return res.status(404).json({message:"Book not found"})
 
         //Use map to find book with similair id and update it
         const updatedBookArry= BookArray.map((book:Book) =>
             //use ternary operator to update book with similair id 
-            book.id === parseInt(id)? {...book,title, author} : book) 
+            book.id === bookID? {...book,title, author} : book) 
         
             //updated the Book arry
             BookArray = updatedBookArry
