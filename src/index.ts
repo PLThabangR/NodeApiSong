@@ -1,9 +1,12 @@
 import express from "express";
-//import { router } from "./routes";
+import  router  from "./routes/bookRoutes";
 
+//create express app instance
 const app = express();
-
+//middleware to allow json
 app.use(express.json());
-//app.use(router);
+//use routes to handle requests
+app.use(router);
 
-app.listen(3333, () => console.log("Server is running!"));
+//start server
+app.listen(3000, () => console.log("Server is running!"));
