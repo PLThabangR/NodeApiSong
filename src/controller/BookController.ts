@@ -46,7 +46,20 @@ if(!author) return res.status(404).json({message:"Author not found"});
 
 //Get all books
 const getBooks = (req: Request, res:Response) => {
-        res.json(BookArray);
+    //create copy of book array 
+    let results = [...BookArray]
+       
+        if(req.query.search){
+            //convert search term to lowercase
+            const searchTerm = String(req.query.search).toLowerCase();
+            //filter books by search term 
+            results = results.filter((book:Book) => book.title.toLowerCase().includes(searchTerm));
+        }
+
+        res.json({
+            count: results.length,
+            results,
+            BookArray});
     };
 
 //Get single book
@@ -110,22 +123,7 @@ const deleteBook = (req: Request, res:Response) => {
         res.json(BookArray);
     };
 
-    export const filterByBookName = (req: Request, res:Response) => {
-        //destructure title from params
-        const { title } = req.params;
-
-        // Check if title is valid
-        if(!title)return res.status(404).json({message:"title not found"});
-
-        let results = [...BookArray]
-
-        if(req.query.search){
-            const searchTerm = String(req.query.search).toLowerCase();
-            results = results.filter((book:Book) => book.title.includes(searchTerm));
-        }
-        res.json(results);
-    }
-    
+   
 
 
 

@@ -10,7 +10,7 @@ router.get("/books/:id",getBookById);
 router.post("/books",addBook);
 router.delete("/books/:id",deleteBook);
 router.put("/books/:id",updateBook);
-router.get("/books",filterByBookName);
+
 
 
 export default router
