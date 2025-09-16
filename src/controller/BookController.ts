@@ -1,17 +1,21 @@
 import { Book} from "./book";
 import { Request, Response } from "express";
+import { Author } from './authors';
+import { AuthorArray } from "./AuthorController";
 
 //create array of books
-let BookArray : Book[] = [
+export let BookArray : Book[] = [
     {
         id: 1,
         title: "The Great Gatsby",
         author: "F. Scott Fitzgerald",
+        AuthorId: 1
        },
         {
         id: 2,
         title: "To Kill a Mockingbird",
         author: "Harper Lee",
+        AuthorId: 2
        },
      
 
@@ -20,12 +24,20 @@ let BookArray : Book[] = [
 //Add new book
 const addBook = (req: Request, res:Response) => {
     //destructure from body
-        const { id, title, author } = req.body;
+        const {  authorID, title } = req.body;
 
-if(!title || !author)
-    return res.status(404).json({message:"Title and author are required"});
+        if(!authorID) return res.status(404).json({message:" AuthorId is required"});    
+
+
+if(!title) return res.status(404).json({message:"Title and author are required"});
+
+//find author by id
+const author = AuthorArray.find((author:Author) => author.id === parseInt(authorID));
+//if not return error message
+if(!author) return res.status(404).json({message:"Author not found"});
+
         //create new bookobject
-        const newBook = { id: BookArray.length + 1, title, author };
+        const newBook = { id: BookArray.length + 1, title,author: author.name, AuthorId: author.id };
         //push new book to array
         BookArray.push(newBook);
         //return new book
@@ -97,6 +109,25 @@ const deleteBook = (req: Request, res:Response) => {
         BookArray = updatedBookArry
         res.json(BookArray);
     };
+
+    export const filterByBookName = (req: Request, res:Response) => {
+        //destructure title from params
+        const { title } = req.params;
+
+        // Check if title is valid
+        if(!title)return res.status(404).json({message:"title not found"});
+
+        let results = [...BookArray]
+
+        if(req.query.search){
+            const searchTerm = String(req.query.search).toLowerCase();
+            results = results.filter((book:Book) => book.title.includes(searchTerm));
+        }
+        res.json(results);
+    }
+    
+
+
 
 
     export {

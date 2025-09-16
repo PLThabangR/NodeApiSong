@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { Author } from "./authors";
+import { Book } from './book';
+import { BookArray } from "./BookController";
 
-let AuthorArray : Author[] = [
+export let AuthorArray : Author[] = [
     {
         id: 1,
         name: "F. Scott Fitzgerald",
@@ -124,6 +126,28 @@ export const getAuthorById = (req: Request, res:Response) => {
             //return updated array without deleted author
             AuthorArray = updatedAuthorArry
             res.json(AuthorArray);
+        } catch (error:any) {
+            return res.status(500).json({message:(error as Error).message});
+        }
+    }
+
+
+    //get author by book id
+    export const getBooksByAuthorID = (req: Request, res:Response) => {
+        const { AuthorID } = req.params;
+        try {
+            //Check if id is valid
+            if(!AuthorID){
+                throw new Error("Invalid author id");
+            }
+            //filter books by author id 
+            const book = BookArray.filter((book:Book) => book.AuthorId === parseInt(AuthorID));
+            if(!book){
+                throw new Error("Books not found");
+            }
+        
+        //return author;
+        res.json(book);
         } catch (error:any) {
             return res.status(500).json({message:(error as Error).message});
         }
