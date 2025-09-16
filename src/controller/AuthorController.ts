@@ -17,7 +17,11 @@ let AuthorArray : Author[] = [
 ]
 
 export const getAuthors = (req: Request, res:Response) => {
-        res.json(AuthorArray);
+       try {
+         res.json(AuthorArray);
+       } catch (error) {
+        return res.status(500).json({message:(error as Error).message});
+       }
     };
 
     //create author
