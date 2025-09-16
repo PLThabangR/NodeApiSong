@@ -24,6 +24,8 @@ http://localhost:3000/books or http://localhost:3000/books/id
 ##  Features
 -  **Add items** to the array
 -  **View all items** or a single item by ID
+-  Get books by author
+-  Search by book title
  
 -  **Update items** (e.g., title, author)  
 -  **Delete items** from the books array  
