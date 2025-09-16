@@ -74,7 +74,7 @@ export const getAuthorById = (req: Request, res:Response) => {
         //destructure id from params
         const { id } = req.params;
         try {
-            // Check if id is valid
+            // Check if id is valid or provided
             if(!id){
                 throw new Error("Invalid id");
             }
@@ -86,12 +86,18 @@ export const getAuthorById = (req: Request, res:Response) => {
             if(!author){
                 throw new Error("Author not found");
             }
-            //Use map to find author with similair id and update it
+           
+            //Use map to find author with similair id and update
             const updatedAuthorArry= AuthorArray.map((author:Author) =>
                 //use ternary operator to update author with similair id 
-                author.id === authorID? {...author,name} : author)
-            
-                //use ternary operator to update author with similair id   
+                author.id === authorID? {...author,name} : author) 
+                
+
+            //updated the Author array
+            AuthorArray = updatedAuthorArry
+        //give feedback to usr
+          res.json(AuthorArray);
+                
             
         } catch (error:any) {
             return res.status(500).json({message:(error as Error).message});
