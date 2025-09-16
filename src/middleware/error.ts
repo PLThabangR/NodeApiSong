@@ -1,0 +1,9 @@
+import { Request, Response, NextFunction } from "express";
+
+
+export const notFoundErrorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+    res.status(404).json({
+        error:"Not Found",
+        message:`Route ${req.originalUrl} not found`});
+    
+}
