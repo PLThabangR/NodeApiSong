@@ -1,6 +1,6 @@
-# Book API 
+# Library API 
 
-A simple **Book List REST API** built with Node.js and TypeScript.  
+A simple **Library api REST API** built with Node.js and TypeScript.  
 This project allows users to **add, view, update, and delete** items from their Book list array.
 
 ---
